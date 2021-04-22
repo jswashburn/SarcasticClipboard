@@ -1,6 +1,9 @@
+from threading import Thread
 from sarcasm_formatter import SarcasmFormatter
 
-class ConfigurationManager:
+import pyperclip
+
+class ClipboardMonitor:
     
     def __init__(self, formatter: SarcasmFormatter):
         self.formatter = formatter
@@ -9,6 +12,7 @@ class ConfigurationManager:
             "resume",
             "quit",
             "help",
+            "pure-sarcasm",
             "set-sarcasm"
         ]
 
@@ -17,10 +21,11 @@ class ConfigurationManager:
             "resume": self.resume,
             "quit": self.quit,
             "help": self.help,
+            "pure-sarcasm": self.enable_pure_sarcasm,
             "set-sarcasm": self.set_variance,
         }
 
-        self.stopped = False
+        self.requested_quit = False
 
     def help(self, args):
         print("Available Commands:")
@@ -28,8 +33,7 @@ class ConfigurationManager:
             print("- " + command)
     
     def quit(self, args):
-        print("config quit called")
-        self.stopped = True
+        self.requested_quit = True
     
     def pause(self, args):
         self.formatter.is_paused = True
@@ -41,6 +45,12 @@ class ConfigurationManager:
         if not args.isdigit():
             raise TypeError(args)
         self.formatter.variance = int(args)
+
+    def enable_pure_sarcasm(self, args):
+        if args.lower() == "on":
+            self.formatter.use_pure_sarcasm(True)
+        elif args.lower() == "off":
+            self.formatter.use_pure_sarcasm(False)
 
     def is_valid_command(self, command):
         return command in self.available_commands
@@ -58,10 +68,24 @@ class ConfigurationManager:
         command, args = self.parse_command(command)
         if self.is_valid_command(command):
             self.command_actions[command](args)
-    
-    def start_input_loop(self):
+
+    def monitor_clipboard(self):
         while True:
-            if self.stopped:
+            if self.requested_quit:
                 return
+            try:
+                copied = pyperclip.waitForNewPaste(1)
+                formatted = self.formatter.format(copied)
+                pyperclip.copy(formatted)
+            except pyperclip.PyperclipTimeoutException:
+                continue
+
+    def start(self):
+        clipboard_monitor = Thread(target=self.monitor_clipboard)
+        clipboard_monitor.start()
+        while True:
+            if self.requested_quit:
+                break
+
             command = input("> ")
             self.handle_command(command)
