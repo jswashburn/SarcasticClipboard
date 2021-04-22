@@ -9,7 +9,7 @@ Great for sarcastic people who are tired of manually typing their sarcasm. With 
 - If you download this you will need the [pyperclip](https://pypi.org/project/pyperclip/) module to run it.
 
 ## Usage:
-1. Run script
+1. Run "main.py"
 2. While script is running, any text you copy to your clipboard will be made sArCasTiC
 3. You can enter certain commands to the script while its running to configure options for sarcasm formatting
 4. Enter 'help' to see the list of available commands
