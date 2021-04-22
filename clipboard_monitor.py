@@ -1,6 +1,8 @@
 from threading import Thread
 from sarcasm_formatter import SarcasmFormatter
 
+# TODO: find a way to factor out all the command parsing stuff (maybe a command_parser.handle_command(input))
+
 import pyperclip
 
 class ClipboardMonitor:
