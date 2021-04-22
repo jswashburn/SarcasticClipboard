@@ -14,4 +14,12 @@ Great for sarcastic people who are tired of manually typing their sarcasm. With 
 
 **Note**: Formatting is applied to clipboard text _after copying_ , not after pasting. If you change formatting settings during the runtime, you won't see them applied until you've copied some new text.
 
-**_Use sarcasm responsibly_** ༼ つ ◕_◕ ༽つ
+## Commands:
+- pause: formatting will not be applied to copied text after entering this command
+- resume: resumes formatting copied text after pausing
+- quit: exits application
+- help: displays available commands
+- pure-sarcasm {on, off}: **Enabled by default**, Makes it so all even indexed characters in a string are swapped case, and all odd indexed characters remain the same. Perfect, pure sarcasm. Ex: HeRe iS aN eXaMpLe (every other character is caps)
+- set-sarcasm INT: When pure-sarcasm is disabled, pass an integer to this command. The closer to 100, the more capital letters you will see in the formatted text. The higher this number, the more angry your text will look.
+
+**_Use sarcasm responsibly_** ༼ つ ◕_◕ ༽つ 🙄
