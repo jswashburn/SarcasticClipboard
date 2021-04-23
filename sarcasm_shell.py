@@ -96,5 +96,6 @@ pure_sarcasm {ON, OFF}"""
         return current_settings
 
     def do_settings(self, line):
+        """Display current settings"""
         print(self.get_current_settings())
 
