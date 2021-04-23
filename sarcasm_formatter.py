@@ -1,18 +1,24 @@
 import random
 
-class SarcasmFormatter:
-    def __init__(self):
-        self.variance = 50
-        self.is_paused = False
-        self.pure = True
+class SarcasmFormatterConfiguration:
+    def __init__(self, variance=50, pure=True):
+        self.variance = variance
+        self.pure = pure
+
+    def set_variance(self, variance):
+        self.variance = variance
     
+    def set_pure(self, pure):
+        self.pure = pure
+
+class SarcasmFormatter:
+    def __init__(self, config):
+        self.config = config
+
     def passes(self):
         score = random.randrange(0, 100)
-        if score < self.variance:
+        if score < self.config.variance:
             return True
-    
-    def use_pure_sarcasm(self, pure):
-        self.pure = pure
     
     def format_pure(self, string):
         formatted = ""
@@ -24,13 +30,7 @@ class SarcasmFormatter:
                 formatted += c
         return formatted
 
-    def format(self, string: str):
-        if self.is_paused:
-            return string
-            
-        if self.pure:
-            return self.format_pure(string)
-
+    def format_with_variance(self, string):
         formatted = ""
         for c in string:
             if self.passes():
@@ -38,3 +38,8 @@ class SarcasmFormatter:
             else:
                 formatted += c
         return formatted
+
+    def format(self, string: str):
+        if self.config.pure:
+            return self.format_pure(string)
+        return self.format_with_variance(string)
