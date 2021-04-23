@@ -9,6 +9,14 @@ class ClipboardMonitor:
 
     def config(self, config_action):
         config_action(self.formatter.config)
+    
+    def get_formatter_config(self):
+        return self.formatter.config
+    
+    def get_config_status(self):
+        pause_status = "Monitor is{paused} paused".format(
+            paused="" if self.paused else " NOT")
+        return (pause_status,)
 
     def quit(self):
         self.requested_quit = True

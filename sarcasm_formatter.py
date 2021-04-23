@@ -5,6 +5,13 @@ class SarcasmFormatterConfiguration:
         self.variance = variance
         self.pure = pure
 
+    def get_config_status(self):
+        pure_sarcasm = "Pure Sarcasim is {pure}".format(
+            pure="ON" if self.pure else "OFF")
+        variance = "Current variance is {variance}".format(
+            variance=self.variance)
+        return pure_sarcasm, variance
+
     def set_variance(self, variance):
         self.variance = variance
     
