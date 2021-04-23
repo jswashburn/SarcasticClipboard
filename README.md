@@ -18,6 +18,7 @@ Great for sarcastic people who are tired of manually typing their sarcasm. With 
 **Note**: Formatting is applied to clipboard text _after copying_ , not after pasting. If you change formatting settings during the runtime, you won't see them applied until you've copied some new text.
 
 ## Commands:
+- settings: display current formatter settings
 - pause: formatting will not be applied to copied text after entering this command
 - resume: resumes formatting copied text after pausing
 - quit: exits application
