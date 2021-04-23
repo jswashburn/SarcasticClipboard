@@ -6,7 +6,7 @@ Copy text, and paste in sarcasm case
 Great for sarcastic people who are tired of manually typing their sarcasm. With this script and the help of the [pyperclip](https://github.com/asweigart/pyperclip) module from Al Sweigart, you can copy any text and paste it sarcasticly.
 
 ## Dependancies:
-- If you download this you will need the [pyperclip](https://pypi.org/project/pyperclip/) module to run it.
+- If you download this you will need the [pyperclip](https://pypi.org/project/pyperclip/) module.
 
 ## Usage:
 1. Run "main.py"
@@ -22,7 +22,7 @@ Great for sarcastic people who are tired of manually typing their sarcasm. With 
 - resume: resumes formatting copied text after pausing
 - quit: exits application
 - help: displays available commands
-- pure-sarcasm {on, off}: **Enabled by default**, Makes it so all even indexed characters in a string are swapped case, and all odd indexed characters remain the same. Perfect, pure sarcasm. Ex: HeRe iS aN eXaMpLe (every other character is caps)
-- set-sarcasm INT: When pure-sarcasm is disabled, pass an integer to this command. The closer to 100, the more capital letters you will see in the formatted text. The higher this number, the more angry your text will look.
+- pure_sarcasm {on, off}: **Enabled by default**, Makes it so all even indexed characters in a string are swapped case, and all odd indexed characters remain the same. Perfect, pure sarcasm. Ex: HeRe iS aN eXaMpLe (every other character is caps)
+- set_sarcasm INT: When pure-sarcasm is disabled, pass an integer to this command. The closer to 100, the more capital letters you will see in the formatted text. The higher this number, the more angry your text will look.
 
 **_Use sarcasm responsibly_** ༼ つ ◕_◕ ༽つ 🙄
