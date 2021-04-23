@@ -2,6 +2,14 @@ import cmd
 from datetime import datetime
 from threading import Thread
 
+def parse_int(arg):
+    if arg.isdigit():
+        return int(arg)
+
+def get_time_prompt():
+    time = datetime.now().strftime("%H:%M:%S")
+    return f"({time}): "
+
 # TODO: Command to display current formatter configuration
 
 class SarcasmShell(cmd.Cmd):
@@ -74,10 +82,19 @@ pure_sarcasm {ON, OFF}"""
     def do_EOF(self, line):
         return True
 
-def parse_int(arg):
-    if arg.isdigit():
-        return int(arg)
+    def get_current_settings(self):
+        formatter_config = self.monitor.get_formatter_config()
 
-def get_time_prompt():
-    time = datetime.now().strftime("%H:%M:%S")
-    return f"({time}): "
+        formatter_settings = formatter_config.get_config_status()
+        monitor_settings = self.monitor.get_config_status()
+
+        # TODO: fix the conditional formatting and the fstring syntax errors
+        # https://stackoverflow.com/questions/9244909/how-to-implement-conditional-string-formatting/53735672
+        current_settings = "\n".join(setting for setting in formatter_settings) + "\n"
+        current_settings += "\n".join(setting for setting in monitor_settings)
+
+        return current_settings
+
+    def do_settings(self, line):
+        print(self.get_current_settings())
+
