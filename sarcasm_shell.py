@@ -10,11 +10,10 @@ def get_time_prompt():
     time = datetime.now().strftime("%H:%M:%S")
     return f"({time}): "
 
-# TODO: Command to display current formatter configuration
-
 class SarcasmShell(cmd.Cmd):
 
-    intro = """Welcome to the sarcastic cliboard!
+    intro = """
+Welcome to the sarcastic cliboard!
 
 Copy some text and when you paste, it will be formatted sArCastIclY.
 Enter 'help' for a list of available configuration commands.
@@ -88,8 +87,6 @@ pure_sarcasm {ON, OFF}"""
         formatter_settings = formatter_config.get_config_status()
         monitor_settings = self.monitor.get_config_status()
 
-        # TODO: fix the conditional formatting and the fstring syntax errors
-        # https://stackoverflow.com/questions/9244909/how-to-implement-conditional-string-formatting/53735672
         current_settings = "\n".join(setting for setting in formatter_settings) + "\n"
         current_settings += "\n".join(setting for setting in monitor_settings)
 
