@@ -1,4 +1,4 @@
-# SarcasticClipboard
+# Sarcastic Clipboard
 Copy text, and paste in sarcasm case
 ### Looks like this: 
 > "yeah sure i'll get right on that" -> "YeAh sUrE I'Ll gEt rIgHt oN ThAt"
