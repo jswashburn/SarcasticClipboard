@@ -4,7 +4,6 @@ from sarcasm_shell import SarcasmShell
 
 # TODO: Add logging
 # TODO: Write tests
-# BUG: 'quit' command no worky
 # TODO: Add clipboard preview
 
 if __name__ == '__main__':

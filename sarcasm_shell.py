@@ -1,4 +1,5 @@
 import cmd
+import sys
 from datetime import datetime
 from threading import Thread
 
@@ -50,7 +51,7 @@ Please use sarcasm responsibly.
     def do_quit(self, line):
         """Stop the clipboard monitor and exit the interpreter"""
         self.stop_monitor()
-        self.do_EOF(line)
+        sys.exit()
     
     def do_pause(self, line):
         """Prevent further formatting of copied text until 'resume' is entered"""
