@@ -31,6 +31,8 @@ Please use sarcasm responsibly.
         super().__init__()
 
     def emptyline(self):
+        # run when no command is entered, by default repeats last command.
+        # disable this behavior with pass
         pass
 
     def preloop(self):
@@ -46,7 +48,7 @@ Please use sarcasm responsibly.
         self.monitor_thread.start()
     
     def stop_monitor(self):
-        self.monitor.quit()
+        self.monitor.config.quit()
 
     def do_quit(self, line):
         """Stop the clipboard monitor and exit the interpreter"""
@@ -55,11 +57,11 @@ Please use sarcasm responsibly.
     
     def do_pause(self, line):
         """Prevent further formatting of copied text until 'resume' is entered"""
-        self.monitor.pause()
+        self.monitor.configure(lambda c: c.pause())
 
     def do_resume(self, line):
         """Resume formatting copied text"""
-        self.monitor.resume()
+        self.monitor.configure(lambda c: c.resume())
 
     def do_set_variance(self, line):
         """Sets the casing variance of sarcastically formatted text.
@@ -67,7 +69,7 @@ A higher number will result in an angrier looking string -
 0 means no formatting at all, 100 means all caps.
 set_variance: INT"""
         variance = parse_int(line)
-        self.monitor.config(lambda c: c.set_variance(variance))
+        self.monitor.configure_formatter(lambda c: c.set_variance(variance))
 
     def do_pure_sarcasm(self, line):
         """Enabled by default.
@@ -75,25 +77,25 @@ Every other letter is swapcased, and formatting no longer
 relies on variance.
 pure_sarcasm {ON, OFF}"""
         if line == "on":
-            self.monitor.config(lambda c: c.set_pure(True))
+            self.monitor.configure_formatter(lambda c: c.set_pure(True))
         elif line == "off":
-            self.monitor.config(lambda c: c.set_pure(False))
-    
-    def do_EOF(self, line):
-        return True
+            self.monitor.configure_formatter(lambda c: c.set_pure(False))
 
-    def get_current_settings(self):
-        formatter_config = self.monitor.get_formatter_config()
-
-        formatter_settings = formatter_config.get_config_status()
-        monitor_settings = self.monitor.get_config_status()
+    def do_settings(self, line):
+        """Display current settings"""
+        formatter_settings = self.monitor.get_formatter_config().get_status()
+        monitor_settings = self.monitor.config.get_status()
 
         current_settings = "\n".join(setting for setting in formatter_settings) + "\n"
         current_settings += "\n".join(setting for setting in monitor_settings)
 
-        return current_settings
+        print(current_settings)
 
-    def do_settings(self, line):
-        """Display current settings"""
-        print(self.get_current_settings())
+    def do_format_on_copy(self, line):
+        self.monitor.configure(lambda c: c.set_format_on_copy(True))
 
+    def do_format_on_paste(self, line):
+        self.monitor.configure(lambda c: c.set_format_on_copy(False))
+
+    def do_EOF(self, line):
+        return True
