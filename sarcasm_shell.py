@@ -91,11 +91,5 @@ pure_sarcasm {ON, OFF}"""
 
         print(current_settings)
 
-    def do_format_on_copy(self, line):
-        self.monitor.configure(lambda c: c.set_format_on_copy(True))
-
-    def do_format_on_paste(self, line):
-        self.monitor.configure(lambda c: c.set_format_on_copy(False))
-
     def do_EOF(self, line):
         return True
