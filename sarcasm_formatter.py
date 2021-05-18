@@ -1,5 +1,8 @@
 import random
 
+def maybe(rarity):
+    return random.randrange(0, 100) < rarity:
+
 class SarcasmFormatterConfiguration:
     def __init__(self, variance=50, pure=True):
         self.variance = variance
@@ -22,11 +25,6 @@ class SarcasmFormatter:
     def __init__(self, config):
         self.config = config
 
-    def passes(self):
-        score = random.randrange(0, 100)
-        if score < self.config.variance:
-            return True
-    
     def format_pure(self, string):
         formatted = ""
         for i in range(len(string)):
@@ -40,7 +38,7 @@ class SarcasmFormatter:
     def format_with_variance(self, string):
         formatted = ""
         for c in string:
-            if self.passes():
+            if maybe(self.config.variance):
                 formatted += c.swapcase()
             else:
                 formatted += c
