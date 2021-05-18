@@ -3,7 +3,6 @@ import pyperclip
 class ClipboardMonitorConfiguration:
 
     def __init__(self):
-        self.format_on_copy = False
         self.paused = False
         self.requested_quit = False
     
@@ -15,9 +14,6 @@ class ClipboardMonitorConfiguration:
     
     def resume(self):
         self.paused = False
-    
-    def set_format_on_copy(self, format_on_copy):
-        self.format_on_copy = format_on_copy
     
     def get_status(self):
         pause_status = "Monitor is{paused} paused".format(
@@ -41,8 +37,8 @@ class ClipboardMonitor:
 
     def monitor_clipboard(self):
         while not self.config.requested_quit:
-            # waitForNewPaste blocks, so
-            # time it out in order to check if a cancellation was requested
+            # waitForNewPaste blocks until new text enters the clipboard, so
+            # time it out in order to check if program was quit
             try:
                 copied = pyperclip.waitForNewPaste(timeout=1)
                 formatted = self.formatter.format(copied)
