@@ -1,7 +1,7 @@
 import random
 
 def maybe(rarity):
-    return random.randrange(0, 100) < rarity:
+    return random.randrange(0, 100) < rarity
 
 class SarcasmFormatterConfiguration:
     def __init__(self, variance=50, pure=True):
