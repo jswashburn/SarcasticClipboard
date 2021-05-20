@@ -14,7 +14,7 @@ def get_time_prompt():
 class SarcasmShell(cmd.Cmd):
 
     intro = """
-Welcome to the sarcastic cliboard!
+Welcome to the sarcastic clipboard!
 
 Copy some text and when you paste, it will be formatted sArCastIclY.
 Enter 'help' for a list of available configuration commands.
