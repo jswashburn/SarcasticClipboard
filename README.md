@@ -6,10 +6,10 @@ Copy text, and paste in sarcasm case
 Great for sarcastic people who are tired of manually typing their sarcasm. With this script and the help of the [pyperclip](https://github.com/asweigart/pyperclip) module from Al Sweigart, you can copy any text and paste it sarcasticly.
 
 ## Dependencies:
-- [pyperclip](https://pypi.org/project/pyperclip/)
+- [pyperclip](https://pypi.org/project/pyperclip/) `pip install pyperclip`
 
 ## Usage:
-1. Run "main.py"
+1. Run "main.py" `python main.py`
 2. While script is running, any text you copy to your clipboard will be made sArCasTiC
 3. You can enter certain commands to the script while its running to configure options for sarcasm formatting
 4. Enter 'help' to see the list of available commands
